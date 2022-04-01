@@ -6,4 +6,13 @@
 #include <boost/asio.hpp>
 
 
+class MultiServer
+{
+public:
+
+private:
+
+};
+
+
 
