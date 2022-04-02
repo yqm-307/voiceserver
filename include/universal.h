@@ -8,7 +8,7 @@
 #include <vector>
 
 
-#define BUFSIZE 1024
+
 
 namespace def
 {
@@ -16,4 +16,17 @@ namespace def
 template<class T>
 using SharedPtr = boost::shared_ptr<T>; 
 
+typedef boost::function<void(const boost::system::error_code&)> ErrorCallback;
+typedef boost::function<void(const boost::system::error_code&,size_t)> SendtoCallback;
+
+
+#define BUFSIZE 1024
+#define ErrorCallback def::ErrorCallback
+#define SendtoCallback def::SendtoCallback
+#define ConnectionPtr def::SharedPtr<boost::asio::ip::udp::socket>
+
 }
+
+
+
+

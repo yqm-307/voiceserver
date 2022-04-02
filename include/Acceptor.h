@@ -4,12 +4,10 @@
 */
 #include <include/universal.h>
 
-
 class Acceptor
 {
 public:
 
-    typedef def::SharedPtr<boost::asio::ip::udp::socket> ConnectionPtr;
     typedef boost::array<char,BUFSIZE> BUFFER;
     typedef boost::function<void(ConnectionPtr&,BUFFER&)> OnConnectCallback;
     /*
