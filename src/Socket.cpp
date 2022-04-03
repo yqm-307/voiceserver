@@ -31,5 +31,12 @@ int Socket::sendto(const char* buf,int len,Address peer)
     return n;
 }
 
-
+int Socket::recvfrom(char* recvbuf,int len,Address peer)
+{
+    assert(recvcb_);
+    int n = socket_.async_receive_from(boost::asio::buffer(recvbuf,len),const_cast<Address&>(peer()),recvcb_);
+    if(n<len)
+        WARN("%d bytes have been recv, but %d bytes remain unrecv",n,len-n);
+    return n;
+}
 

@@ -59,7 +59,7 @@ public:
      * @param peer_ 对端地址
      * @return int 接收数据长度
      */
-    int recvfrom(const char *buf,int len,Address peer_);
+    int recvfrom(char *buf,int len,Address peer_);
 
     /* 设置错误时回调 */
     void setErrorCallback(ErrorCallback& cb)
@@ -73,6 +73,8 @@ private:
     boost::asio::ip::udp::socket socket_;   /* 套接字 */
     static ikcpcb* kcp_;   /* 对应的kcpcb */
     OUTPUTFUNC* output_;    /* kcpcb的数据发送调用，kcp本身0系统调用，需要用户传递系统调用 */
+
     ErrorCallback errorcb_; /* error 回调*/
     SendtoCallback sendcb_; /* senddata 回调*/
+    RecvfromCallback recvcb_; /* recvfrom 回调*/
 };
