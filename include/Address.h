@@ -10,6 +10,16 @@ class Address
 {
 public:
     /**
+     * @brief 默认构造
+     */
+    Address()=default;
+    /**
+     * @brief 直接传入endpoint
+     * @param endpoint udp地址
+     */
+    Address(boost::asio::ip::udp::endpoint endpoint)
+        :endpoint_(endpoint){};
+    /**
      * @brief Address的构造，右值
      */
     Address(const std::string&& ip,int port)
@@ -41,6 +51,10 @@ public:
      * @return endpoint的常引用 
      */
     const boost::asio::ip::udp::endpoint& operator()() const
+    {
+        return endpoint_;
+    }
+    boost::asio::ip::udp::endpoint& operator()()
     {
         return endpoint_;
     }
