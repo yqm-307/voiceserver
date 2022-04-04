@@ -26,7 +26,7 @@ typedef BufferCallback RecvfromCallback;
 #define SendtoCallback def::SendtoCallback
 #define ConnectionPtr def::SharedPtr<boost::asio::ip::udp::socket>
 #define RecvfromCallback def::RecvfromCallback
-
+#define IKCPRECVBUF 4096
 }
 
 
