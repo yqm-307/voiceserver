@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/udpserver.dir/UdpSocketTest.cpp.o CMakeFiles/udpserver.dir/home/yqm/Git/voiceserver/src/Logger.cpp.o CMakeFiles/udpserver.dir/home/yqm/Git/voiceserver/src/Socket.cpp.o  -o udpserver  -lboost_regex -lboost_thread -lpthread 

@@ -1,0 +1,3 @@
+/home/yqm/Git/voiceserver/test/CMakeFiles/rebuild_cache.dir
+/home/yqm/Git/voiceserver/test/CMakeFiles/edit_cache.dir
+/home/yqm/Git/voiceserver/test/CMakeFiles/udpserver.dir
