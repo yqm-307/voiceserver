@@ -92,19 +92,19 @@ void Logger::Log(LOGLEVEL level ,const std::string& str)
         strcpy(log+strlen(log),LeveL[0]);
         break;
     case LOGLEVEL::LOG_DEBUG :
-        strcpy(log+strlen(log),LeveL[0]);
+        strcpy(log+strlen(log),LeveL[1]);
         break;
     case LOGLEVEL::LOG_INFO :
-        strcpy(log+strlen(log),LeveL[0]);
+        strcpy(log+strlen(log),LeveL[2]);
         break;
     case LOGLEVEL::LOG_WARN :
-        strcpy(log+strlen(log),LeveL[0]);
+        strcpy(log+strlen(log),LeveL[3]);
         break;
     case LOGLEVEL::LOG_ERROR :
-        strcpy(log+strlen(log),LeveL[0]);
+        strcpy(log+strlen(log),LeveL[4]);
         break;
     case LOGLEVEL::LOG_FATAL :
-        strcpy(log+strlen(log),LeveL[0]);
+        strcpy(log+strlen(log),LeveL[5]);
         break;
     default:
         break;
@@ -113,8 +113,6 @@ void Logger::Log(LOGLEVEL level ,const std::string& str)
     strcpy(log+strlen(log),str.c_str());
     strcpy(log+strlen(log),"\n");
     Enqueue(log);
-
-
 }
 
 

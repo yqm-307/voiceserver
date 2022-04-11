@@ -9,7 +9,7 @@
 // + Lightweight, distributed as a single source file.
 //
 //=====================================================================
-#include "kcp.h"
+#include "../include/kcp.h"
 
 #include <stddef.h>
 #include <stdlib.h>

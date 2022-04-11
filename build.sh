@@ -12,17 +12,26 @@ clear()
 
 build()
 {
-    cmake .
-    make
+    #编译整个项目目录
+    #cmake .
+    #make
+    
+    #编译子目录
+    FILE=./test
+    if [ -d "$FILE" ]; then
+        #存在
+        cd test
+        cmake .
+        make
+        cd ..
+    fi
 }
 
 if [ "${clear}" = "clear" ]
 then
     clear
     cd test
-    clear
-    cd ..
-
+    ./clear.sh
 else
     build
 fi

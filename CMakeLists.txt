@@ -13,4 +13,4 @@ include_directories(include)
 #源文件集合 SOURCES
 file(GLOB SOURCES ./src/*.cpp)
 
-add_subdirectory(test)
+

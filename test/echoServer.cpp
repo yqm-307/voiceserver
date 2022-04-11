@@ -1,5 +1,6 @@
 #include "../include/Socket.h"
 #include "../include/Address.h"
+#include "../include/Logger.h"
 
 class server
 {    
@@ -19,7 +20,7 @@ public:
             Address client;
             char buf[1024];
             socket.recvfrom(buf,1024,client);
-            printf("接收：%d\n",buf);
+            printf("接收：%s\n",buf);
         }
     }
 private:
@@ -29,7 +30,7 @@ private:
 
 int main()
 {
+    udp::Logger::GetInstance("./Server.log");
     boost::asio::io_context ioc;
     server server(ioc);
-    
 }

@@ -7,7 +7,7 @@
 #include <memory>
 #include <condition_variable>   //mutex
 #include <functional>
-#include <include/noncopyable.h>
+#include <noncopyable.h>
 
 namespace  udp
 {
@@ -38,7 +38,7 @@ static const char* LeveL[6]{
 class Logger : noncopyable
 {
 public:
-    static Logger* GetInstance(std::string name = "./log");
+    static Logger* GetInstance(std::string name = "./log.txt");
     void Log(LOGLEVEL level,const std::string& log);
     static void SetFileName(std::string name);
 private:
