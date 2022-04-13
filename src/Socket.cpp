@@ -39,11 +39,15 @@ void Socket::ikcpinit()
     kcp_ = ikcp_create(1,this);
     assert(Soutput_!=nullptr);
     ikcp_setoutput(kcp_,Soutput_);
-    Soutput_ = [](const char*buf,int len,
-                ikcpcb* ikcp,void*user)->int
+    Soutput_ = [](const char*buf,int len,ikcpcb* ikcp,void*user)->int
     {
+        printf("b1\n");
         Socket* socket = reinterpret_cast<Socket*>(user);
         return socket->socket_.send_to(boost::asio::buffer(buf,len),socket->peer_());
+    };
+    kcp_->writelog = [](const char* log,ikcpcb*kcp,void* user)
+    {
+        INFO("log");
     };
 }
 
@@ -91,6 +95,7 @@ Socket::~Socket()
 int Socket::sendto(const char* buf,int len,Address peer)
 {
     update();
+    this->peer(peer);
     int n = ikcp_send(kcp_,buf,len);
     if(n < 0) 
         WARN("ikcp_send: error , errcode %d",n);

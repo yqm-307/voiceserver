@@ -21,6 +21,7 @@ public:
             char buf[1024];
             socket.recvfrom(buf,1024,client);
             printf("接收：%s\n",buf);
+            //socket.sendto(buf,strlen(buf),client);
         }
     }
 private:

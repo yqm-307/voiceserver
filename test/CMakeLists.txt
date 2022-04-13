@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.6)
-project(sockettest CXX C)
+project(sockettest C CXX)
 
 include_directories(../include)
 

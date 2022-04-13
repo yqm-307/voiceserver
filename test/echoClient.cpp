@@ -13,11 +13,11 @@ public:
         socket_.peer(peer);
         start();
     }   
-    KcpClient(boost::asio::io_context& ioc,Address& local_)
+    KcpClient(boost::asio::io_context& ioc,Address& peer)
         :socket_(ioc),
-        peer_(local_)
+        peer_(peer)
     {
-        socket_.peer(local_);
+        socket_.peer(peer);
         start();
     }  
 
