@@ -25,9 +25,11 @@ public:
     {
         while (1)
         {
+            socket_.update();
             Address client;
             char buf[1024];
             memset(buf,'\0',1024);
+            printf("输入:");
             std::cin>>buf;
             socket_.sendto(buf,strlen(buf),peer_);
             //memset(buf,'\0',1024);
@@ -44,7 +46,6 @@ private:
 int main()
 {
     udp::Logger::GetInstance("./Client.log");
-    FATAL("a");
     boost::asio::io_context ioc;
     KcpClient(ioc,Address("127.0.0.1",13000));
 }

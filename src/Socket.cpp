@@ -37,17 +37,14 @@ void Socket::ikcpinit()
 {
     //ikcp 资源初始化
     kcp_ = ikcp_create(1,this);
-    assert(Soutput_!=nullptr);
-    ikcp_setoutput(kcp_,Soutput_);
-    Soutput_ = [](const char*buf,int len,ikcpcb* ikcp,void*user)->int
+    kcp_->output = [](const char*buf,int len,ikcpcb* ikcp,void*user)->int
     {
-        printf("b1\n");
         Socket* socket = reinterpret_cast<Socket*>(user);
         return socket->socket_.send_to(boost::asio::buffer(buf,len),socket->peer_());
     };
     kcp_->writelog = [](const char* log,ikcpcb*kcp,void* user)
     {
-        INFO("log");
+        INFO("%s",log);
     };
 }
 
@@ -61,10 +58,11 @@ int Socket::ikcpRecvRelay(char* buf, int len)
 
 void Socket::ikcpRecv(Address& peer)
 {
-    boost::asio::ip::udp::endpoint clientendpoint;
-    size_t n = socket_.receive_from(boost::asio::buffer(ikcprecvbuf_,IKCPRECVBUF),peer());
-    INFO("Receives %d bytes from the network",n);
-    int nbytes = ikcp_input(kcp_,ikcprecvbuf_,n);
+    char buf[4096];
+    size_t n = socket_.receive_from(boost::asio::buffer(buf,IKCPRECVBUF),peer());
+    INFO("Receives %d bytes from the network \n\trecv:%s",n,buf);
+    int nbytes = ikcp_input(kcp_,buf,n);
+
 }
 
 void Socket::update(int current)
@@ -94,7 +92,6 @@ Socket::~Socket()
 
 int Socket::sendto(const char* buf,int len,Address peer)
 {
-    update();
     this->peer(peer);
     int n = ikcp_send(kcp_,buf,len);
     if(n < 0) 
@@ -102,22 +99,22 @@ int Socket::sendto(const char* buf,int len,Address peer)
     //发送完当即flush
     //todo input、output
     ikcp_flush(kcp_);
+    INFO("ikcp_flush");
     return n;
 
 }
 
-void Socket::recvfrom(char* recvbuf,int len,Address& peer)
+int Socket::recvfrom(char* recvbuf,int len,Address& peer)
 {
-    update();
     ikcpRecv(peer); //传入kcp当前数据
     int n = ikcp_recv(kcp_,recvbuf,len);
     if(n == -1)//接收区缓存无数据
         INFO("ikcp_recv: the receiving buffer has no data");
-    
     else if(n>=0)
-        INFO("recv %dbytes",n);
+        INFO("recv %d bytes\n\trecv:%s",n,recvbuf);
     else
         ERROR("ikcp_recv: error , errcode: %d",n);
+    return n;
 }
 
 void Socket::bind(Address local)

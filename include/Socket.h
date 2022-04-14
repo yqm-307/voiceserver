@@ -65,7 +65,7 @@ public:
      * @param len 缓冲区长度
      * @param peer_ 对端地址
      */
-    void recvfrom(char *buf,int len,Address& peer);
+    int recvfrom(char *buf,int len,Address& peer);
     
     
     
@@ -128,7 +128,6 @@ private:
     ikcpcb* kcp_;                   /* 对应的kcpcb */
     boost::asio::ip::udp::socket socket_;   /* 套接字 */
     Address peer_;                  /* 对端地址*/
-    OUTPUTFUNC* Soutput_;     /* kcpcb的数据发送调用，kcp本身0系统调用，需要用户传递系统调用 */
     char ikcprecvbuf_[IKCPRECVBUF];  /* kcp接收缓存*/
 
     ErrorCallback errorcb_;     /* error 回调*/
