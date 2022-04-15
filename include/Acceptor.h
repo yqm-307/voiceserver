@@ -3,6 +3,7 @@
     连接
 */
 #include "universal.h"
+#include "Socket.h"
 
 class Acceptor
 {
@@ -13,10 +14,10 @@ public:
     /*
     * @brief Acceptor构造函数
     * @param ioc io上下文
-    * @param addr 服务器本地地址
+    * @param addr 服务器本地地址    udp::v4()
     * @return null
     */
-    Acceptor(boost::asio::io_context& ioc,boost::asio::ip::address& addr,int port);
+    Acceptor(boost::asio::io_context& ioc,int port);
     ~Acceptor();
     
     /*  
@@ -29,9 +30,9 @@ private:
     //io上下文，不由Acceptor管理
     boost::asio::io_context& ioc_;
     //本地地址
-    boost::asio::ip::udp::endpoint localaddress_;
+    Address localaddress_;
     //监听socket
-    boost::asio::ip::udp::socket listenfd_;
+    Socket listen_;
     //新连接时回调
     boost::thread listenthread_;
 };

@@ -8,7 +8,7 @@
 #include <vector>
 
 
-
+#define ROOM_MAX_SIZE 4
 
 namespace def
 {

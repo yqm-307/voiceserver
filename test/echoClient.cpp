@@ -32,9 +32,9 @@ public:
             printf("输入:");
             std::cin>>buf;
             socket_.sendto(buf,strlen(buf),peer_);
-            //memset(buf,'\0',1024);
-            //socket_.recvfrom(buf,1024,peer_);
-            //printf("接收:%s\n",buf);
+            memset(buf,'\0',1024);
+            socket_.recvfrom(buf,1024,peer_);
+            printf("接收:%s\n",buf);
         }
         
     }
