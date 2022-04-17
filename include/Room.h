@@ -3,6 +3,7 @@
     房间属性、基本操作
 */
 #include <vector>
+#include "Socket.h"
 #include "User.h"
 #include "universal.h"  
 
